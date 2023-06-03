@@ -21,8 +21,8 @@ app.post('/api/canxuongtinhso', async function (req, res) {
     try {
         console.log(req.body);
         const data = await axios.post("https://lichngaytot.com/Ajax/CanXuongTinhSoAjax", {
-            "dateOfBirth": req.body.date,
-            "yearView": req.body.hour
+            "dateOfBirth": req.body.date as string | "19-12-2002",
+            "yearView": req.body.hour as string | "Mão"
         })
 
         const [text, ...rest] = [...(data.data as string).matchAll(/<div.*?>(.*?)<\/div>/g)]
