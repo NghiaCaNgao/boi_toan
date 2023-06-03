@@ -18,21 +18,25 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/api/canxuongtinhso', async function (req, res) {
-    console.log(req.body);
-    const data = await axios.post("https://lichngaytot.com/Ajax/CanXuongTinhSoAjax", {
-        "dateOfBirth": req.body.date,
-        "yearView": req.body.hour
-    })
+    try {
+        console.log(req.body);
+        const data = await axios.post("https://lichngaytot.com/Ajax/CanXuongTinhSoAjax", {
+            "dateOfBirth": req.body.date,
+            "yearView": req.body.hour
+        })
 
-    const [text, ...rest] = [...(data.data as string).matchAll(/<div.*?>(.*?)<\/div>/g)]
-        .map(matchingText => matchingText[1]);
-    const poem = rest.slice(1).join("\n")
-    const comment = text.split(".").slice(0,-1)
-    
-    res.json({ comment, poem })
+        const [text, ...rest] = [...(data.data as string).matchAll(/<div.*?>(.*?)<\/div>/g)]
+            .map(matchingText => matchingText[1]);
+        const poem = rest.slice(1).join("\n")
+        const comment = text.split(".").slice(0, -1)
+
+        res.json({ comment, poem })
+    } catch (e) {
+        res.end("Failed")
+    }
 })
 
-app.get("/", (req, res)=>{
+app.get("/", (req, res) => {
     res.send("Hello World")
 })
 
