@@ -33,7 +33,12 @@ app.post('/api/canxuongtinhso', async function (req, res) {
         const poem = rest.slice(1).join("\n")
         // const comment = text.split(".").slice(0, -1)
 
-        res.json({ text, poem })
+        res.json({
+            messages: [
+                { text: text },
+                { text: poem }
+            ]
+        })
     } catch (e: any) {
         res.send(e.message)
     }
