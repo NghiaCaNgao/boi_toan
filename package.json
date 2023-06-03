@@ -7,9 +7,6 @@
     "start": "node dist/index",
     "webpack": "webpack --config webpack.config.js"
   },
-  "engines": {
-    "node": "14.x"
-  },
   "keywords": [
     "boi_toan"
   ],
