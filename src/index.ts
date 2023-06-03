@@ -19,7 +19,6 @@ app.use(express.json());
 
 app.post('/api/canxuongtinhso', async function (req, res) {
     try {
-        console.log(req);
         console.log(req.body);
         const data = await axios.post("https://lichngaytot.com/Ajax/CanXuongTinhSoAjax", {
             "dateOfBirth": req.body.date as string | "19-12-2002",
@@ -32,8 +31,8 @@ app.post('/api/canxuongtinhso', async function (req, res) {
         const comment = text.split(".").slice(0, -1)
 
         res.json({ comment, poem })
-    } catch (e) {
-        res.end("Failed")
+    } catch (e: any) {
+        res.send(e.message)
     }
 })
 
