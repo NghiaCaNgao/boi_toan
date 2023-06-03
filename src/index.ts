@@ -16,17 +16,18 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.post('/api/canxuongtinhso', async function (req, res) {
-    try {
-        console.log(req.body);
+    try {        
+        const input = req.body;
+        console.log(input);
+
         const data = await axios.post("https://lichngaytot.com/Ajax/CanXuongTinhSoAjax", {
-            "dateOfBirth": req.body.date as string | "19-12-2002",
-            "yearView": req.body.hour as string | "Mão"
+            "dateOfBirth": input.date as string | "19-12-2002",
+            "yearView": input.hour as string | "Mão"
         })
-        
-        console.log(data);
-        
+
         const [text, ...rest] = [...(data.data as string).matchAll(/<div.*?>(.*?)<\/div>/g)]
             .map(matchingText => matchingText[1]);
         const poem = rest.slice(1).join("\n")
