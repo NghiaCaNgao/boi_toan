@@ -24,7 +24,9 @@ app.post('/api/canxuongtinhso', async function (req, res) {
             "dateOfBirth": req.body.date as string | "19-12-2002",
             "yearView": req.body.hour as string | "Mão"
         })
-
+        
+        console.log(data);
+        
         const [text, ...rest] = [...(data.data as string).matchAll(/<div.*?>(.*?)<\/div>/g)]
             .map(matchingText => matchingText[1]);
         const poem = rest.slice(1).join("\n")
