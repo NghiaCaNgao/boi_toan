@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/api/canxuongtinhso', async function (req, res) {
-    try {        
+    try {
         const input = req.body;
         console.log(input);
 
@@ -31,9 +31,9 @@ app.post('/api/canxuongtinhso', async function (req, res) {
         const [text, ...rest] = [...(data.data as string).matchAll(/<div.*?>(.*?)<\/div>/g)]
             .map(matchingText => matchingText[1]);
         const poem = rest.slice(1).join("\n")
-        const comment = text.split(".").slice(0, -1)
+        // const comment = text.split(".").slice(0, -1)
 
-        res.json({ comment, poem })
+        res.json({ text, poem })
     } catch (e: any) {
         res.send(e.message)
     }
