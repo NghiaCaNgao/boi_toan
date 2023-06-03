@@ -19,6 +19,7 @@ app.use(express.json());
 
 app.post('/api/canxuongtinhso', async function (req, res) {
     try {
+        console.log(req);
         console.log(req.body);
         const data = await axios.post("https://lichngaytot.com/Ajax/CanXuongTinhSoAjax", {
             "dateOfBirth": req.body.date as string | "19-12-2002",
